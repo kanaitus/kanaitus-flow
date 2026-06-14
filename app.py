@@ -40,6 +40,13 @@ def inject_custom_css(theme):
         [data-testid="stFileUploader"] p, [data-testid="stFileUploader"] small {
             color: #1c1c1e !important;
         }
+        [data-testid="stFileUploaderDropzone"] * {
+            color: #1c1c1e !important;
+        }
+        [data-testid="stFileUploaderDropzone"] button {
+            background-color: rgba(0,0,0,0.05) !important;
+            border: 1px solid rgba(0,0,0,0.1) !important;
+        }
         /* Умная расцветка для текста тумблеров и чекбоксов */
         [data-testid="stToggle"] label p,
         [data-testid="stToggle"] label span,
@@ -334,11 +341,7 @@ def render_main_content():
         st.write("<br><br><br>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns([1, 4, 1])
         with col2:
-            lottie_json = load_lottieurl("https://assets3.lottiefiles.com/packages/lf20_UJNc2t.json")
-            if lottie_json:
-                st_lottie(lottie_json, height=200, key="initial_anim")
-            else:
-                st.write("<br>", unsafe_allow_html=True)
+            st.write("<br>", unsafe_allow_html=True)
                 
             st.markdown(f'<h1 class="premium-title" style="text-align: center; font-size: 4rem;">{t("title")}</h1>', unsafe_allow_html=True)
             subtitle = "Перетащите ваш CSV или Excel файл прямо сюда для начала анализа" if st.session_state.lang == "ru" else "Drag and drop your CSV or Excel file right here to begin analysis"
