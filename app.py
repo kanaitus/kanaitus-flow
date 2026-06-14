@@ -209,6 +209,8 @@ def inject_custom_css(theme):
             align-items: center;
             justify-content: center;
             min-height: 120px;
+            background: transparent !important;
+            background-color: transparent !important;
         }}
         
         h2, h3, h4 {{
@@ -332,7 +334,7 @@ def render_main_content():
         st.write("<br><br><br>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns([1, 4, 1])
         with col2:
-            lottie_json = load_lottieurl("https://lottie.host/8139e3f6-5f72-46cc-929e-bd8c3c126ec0/uJg8X2X2rN.json")
+            lottie_json = load_lottieurl("https://assets3.lottiefiles.com/packages/lf20_UJNc2t.json")
             if lottie_json:
                 st_lottie(lottie_json, height=200, key="initial_anim")
             else:
