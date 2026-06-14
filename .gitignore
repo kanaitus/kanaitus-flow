@@ -1,0 +1,16 @@
+# Виртуальное окружение Python (очень тяжелое, не загружаем)
+.venv/
+venv/
+env/
+
+# Кэш Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Системные файлы macOS
+.DS_Store
+
+# Временные файлы и отчеты
+.streamlit/secrets.toml
