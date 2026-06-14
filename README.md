@@ -10,7 +10,7 @@
 
 ### 🧠 Концепция создания и роль автора
 Этот проект является демонстрацией современного подхода к разработке — **AI-Assisted Development**. 
-* **Автор идеи, системный архитектор и дирижер проекта:** Дмитрий ([@ваша-почта-или-юзернейм])
+* **Автор идеи, системный архитектор и дирижер проекта:** kanaitus
 * **Реализация кода:** Разработано в тесном сотрудничестве с передовым ИИ-помощником.
 
 > **Как это создавалось:** 
@@ -64,7 +64,7 @@ streamlit run app.py
 
 ### 🧠 Creation Concept & Author's Role
 This project demonstrates the power of the modern **AI-Assisted Development** paradigm.
-* **Product Visionary, System Architect & Conductor:** Dmitry ([@your-email-or-username])
+* **Product Visionary, System Architect & Conductor:** kanaitus
 * **Code Implementation:** Developed in close collaboration with a cutting-edge AI assistant.
 
 > **How it was built:** 
