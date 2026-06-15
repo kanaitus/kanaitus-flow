@@ -4,6 +4,12 @@ import plotly.express as px
 import importlib
 import sys
 import requests
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression, LinearRegression
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
+from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import accuracy_score, f1_score, mean_absolute_error, r2_score
 from streamlit_lottie import st_lottie
 
 def load_lottieurl(url: str):
@@ -374,7 +380,7 @@ def render_main_content():
         
     st.write("") 
     
-    tab1, tab2, tab3, tab4 = st.tabs([t("tab_data"), t("tab_viz"), t("tab_viz_manual"), t("tab_eda")])
+    tab1, tab2, tab3, tab4, tab5 = st.tabs([t("tab_data"), t("tab_viz"), t("tab_viz_manual"), t("tab_eda"), t("tab_ml")])
     
     with tab1:
         st.write(f"### {t('quality_score')}")
@@ -535,6 +541,128 @@ def render_main_content():
             st.dataframe(numeric_df_raw.describe().T, use_container_width=True)
         else:
             st.info("No numeric columns available." if st.session_state.lang == 'en' else "Нет числовых колонок.")
+
+    with tab5:
+        st.write(f"### {t('tab_ml')}")
+        
+        # Check for NaNs
+        if df.isnull().sum().sum() > 0:
+            st.warning(t("ml_na_warning"))
+        else:
+            col_t, col_f = st.columns(2)
+            with col_t:
+                target_col = st.selectbox(t("ml_target"), [t("none")] + list(df.columns))
+            
+            if target_col != t("none"):
+                features = [c for c in df.columns if c != target_col]
+                with col_f:
+                    selected_features = st.multiselect(t("ml_features"), features, default=features)
+                
+                if selected_features:
+                    # ML Task type detection
+                    is_numeric_target = pd.api.types.is_numeric_dtype(df[target_col])
+                    unique_targets = df[target_col].nunique()
+                    
+                    default_task = "Regression" if is_numeric_target and unique_targets > 10 else "Classification"
+                    task_options = [t("ml_classification"), t("ml_regression")]
+                    default_index = 0 if default_task == "Classification" else 1
+                    
+                    st.write("---")
+                    col1, col2, col3 = st.columns(3)
+                    with col1:
+                        task_type = st.selectbox(t("ml_task"), task_options, index=default_index)
+                    with col2:
+                        test_size = st.slider(t("ml_test_size"), 10, 50, 20, 5)
+                    with col3:
+                        random_state = st.number_input("Random State", value=42)
+                        
+                    is_classification = (task_type == t("ml_classification"))
+                    
+                    col_m, col_p = st.columns(2)
+                    with col_m:
+                        if is_classification:
+                            model_name = st.selectbox(t("ml_model"), ["Logistic Regression", "Random Forest", "Decision Tree"])
+                        else:
+                            model_name = st.selectbox(t("ml_model"), ["Linear Regression", "Random Forest", "Decision Tree"])
+                            
+                    with col_p:
+                        # Model specific params
+                        if model_name == "Random Forest":
+                            n_estimators = st.slider("n_estimators", 10, 200, 100, 10)
+                            max_depth = st.slider("max_depth", 1, 20, 5)
+                        elif model_name == "Decision Tree":
+                            max_depth = st.slider("max_depth", 1, 20, 5)
+                            
+                    if st.button(t("ml_train_btn"), use_container_width=True):
+                        with st.spinner(t("generating")):
+                            try:
+                                # Prepare data
+                                X = df[selected_features].copy()
+                                y = df[target_col].copy()
+                                
+                                # Encode categorical features
+                                encoded = False
+                                for col in X.select_dtypes(include=['object', 'category']).columns:
+                                    le = LabelEncoder()
+                                    X[col] = le.fit_transform(X[col].astype(str))
+                                    encoded = True
+                                    
+                                if not is_numeric_target and is_classification:
+                                    le_y = LabelEncoder()
+                                    y = le_y.fit_transform(y.astype(str))
+                                    
+                                if encoded:
+                                    st.info(t("ml_encode_warning"))
+                                    
+                                X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size/100.0, random_state=random_state)
+                                
+                                # Model selection
+                                if is_classification:
+                                    if model_name == "Logistic Regression":
+                                        model = LogisticRegression(random_state=random_state, max_iter=1000)
+                                    elif model_name == "Random Forest":
+                                        model = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth, random_state=random_state)
+                                    else:
+                                        model = DecisionTreeClassifier(max_depth=max_depth, random_state=random_state)
+                                else:
+                                    if model_name == "Linear Regression":
+                                        model = LinearRegression()
+                                    elif model_name == "Random Forest":
+                                        model = RandomForestRegressor(n_estimators=n_estimators, max_depth=max_depth, random_state=random_state)
+                                    else:
+                                        model = DecisionTreeRegressor(max_depth=max_depth, random_state=random_state)
+                                        
+                                model.fit(X_train, y_train)
+                                preds = model.predict(X_test)
+                                
+                                st.write("---")
+                                st.write(f"#### {t('ml_results')}")
+                                res1, res2 = st.columns(2)
+                                
+                                if is_classification:
+                                    acc = accuracy_score(y_test, preds)
+                                    f1 = f1_score(y_test, preds, average='weighted')
+                                    res1.metric(t("ml_accuracy"), f"{acc:.4f}")
+                                    res2.metric(t("ml_f1"), f"{f1:.4f}")
+                                else:
+                                    mae = mean_absolute_error(y_test, preds)
+                                    r2 = r2_score(y_test, preds)
+                                    res1.metric(t("ml_mae"), f"{mae:.4f}")
+                                    res2.metric(t("ml_r2"), f"{r2:.4f}")
+                                    
+                                # Feature importance
+                                if model_name in ["Random Forest", "Decision Tree"]:
+                                    st.write(f"#### {t('ml_feature_imp')}")
+                                    importances = model.feature_importances_
+                                    imp_df = pd.DataFrame({"Feature": X.columns, "Importance": importances}).sort_values(by="Importance", ascending=True)
+                                    fig = px.bar(imp_df, x="Importance", y="Feature", orientation='h', color_discrete_sequence=['#D4AF37'])
+                                    font_color = "#1a1a1a" if st.session_state.theme == 'light' else "#FFFFFF"
+                                    fig.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font_color=font_color, height=300, margin=dict(l=0, r=0, t=0, b=0))
+                                    st.plotly_chart(fig, use_container_width=True)
+                            
+                            except Exception as e:
+                                st.error(f'{t("error")}: {e}')
+
 
 if __name__ == "__main__":
     init_app()

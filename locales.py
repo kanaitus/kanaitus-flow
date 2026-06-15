@@ -45,7 +45,25 @@ TRANSLATIONS = {
         'missing_cells': 'Пустых ячеек',
         'duplicates_count': 'Дубликатов',
         'corr_matrix': 'Матрица корреляций',
-        'distributions': 'Распределения числовых признаков'
+        'distributions': 'Распределения числовых признаков',
+        'tab_ml': '🤖 ML Studio',
+        'ml_target': 'Целевая переменная (Target)',
+        'ml_features': 'Признаки (Features)',
+        'ml_task': 'Тип задачи',
+        'ml_classification': 'Классификация',
+        'ml_regression': 'Регрессия',
+        'ml_model': 'Модель',
+        'ml_test_size': 'Размер тестовой выборки (%)',
+        'ml_train_btn': '🚀 Обучить модель',
+        'ml_results': 'Результаты (Тестовая выборка)',
+        'ml_accuracy': 'Точность (Accuracy)',
+        'ml_f1': 'F1-Score',
+        'ml_mae': 'MAE',
+        'ml_r2': 'R² Score',
+        'ml_feature_imp': 'Важность признаков',
+        'ml_error_target': 'Выберите целевую переменную!',
+        'ml_encode_warning': 'Категориальные признаки были автоматически закодированы.',
+        'ml_na_warning': 'В данных есть пропуски! Пожалуйста, сначала очистите их на вкладке "Очистка данных".'
     },
     'en': {
         'title': 'kanaitus-flow',
@@ -93,7 +111,25 @@ TRANSLATIONS = {
         'missing_cells': 'Missing Cells',
         'duplicates_count': 'Duplicates',
         'corr_matrix': 'Correlation Matrix',
-        'distributions': 'Numeric Distributions'
+        'distributions': 'Numeric Distributions',
+        'tab_ml': '🤖 ML Studio',
+        'ml_target': 'Target Variable (Y)',
+        'ml_features': 'Features (X)',
+        'ml_task': 'Task Type',
+        'ml_classification': 'Classification',
+        'ml_regression': 'Regression',
+        'ml_model': 'Model',
+        'ml_test_size': 'Test Size (%)',
+        'ml_train_btn': '🚀 Train Model',
+        'ml_results': 'Results (Test Set)',
+        'ml_accuracy': 'Accuracy',
+        'ml_f1': 'F1-Score',
+        'ml_mae': 'MAE',
+        'ml_r2': 'R² Score',
+        'ml_feature_imp': 'Feature Importance',
+        'ml_error_target': 'Please select a target variable!',
+        'ml_encode_warning': 'Categorical features were automatically encoded.',
+        'ml_na_warning': 'Missing values detected! Please clean them in the "Data Cleaning" tab first.'
     }
 }
 
