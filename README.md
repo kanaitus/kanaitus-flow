@@ -46,7 +46,17 @@ cd kanaitus-flow
 ```
 
 2. Установите зависимости:
+
+**Для Mac/Linux:**
 ```bash
+pip install -r requirements.txt
+```
+
+**Для Windows:**
+Рекомендуется использовать виртуальное окружение:
+```powershell
+python -m venv venv
+venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -100,7 +110,17 @@ cd kanaitus-flow
 ```
 
 2. Install dependencies:
+
+**For Mac/Linux:**
 ```bash
+pip install -r requirements.txt
+```
+
+**For Windows:**
+It is recommended to use a virtual environment:
+```powershell
+python -m venv venv
+venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
