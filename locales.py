@@ -63,7 +63,8 @@ TRANSLATIONS = {
         'ml_feature_imp': 'Важность признаков',
         'ml_error_target': 'Выберите целевую переменную!',
         'ml_encode_warning': 'Категориальные признаки были автоматически закодированы.',
-        'ml_na_warning': 'В данных есть пропуски! Пожалуйста, сначала очистите их на вкладке "Очистка данных".'
+        'ml_na_warning': 'В данных есть пропуски! Пожалуйста, сначала очистите их на вкладке "Очистка данных".',
+        'export_notebook': '📓 Скачать Jupyter Notebook'
     },
     'en': {
         'title': 'kanaitus-flow',
@@ -129,7 +130,8 @@ TRANSLATIONS = {
         'ml_feature_imp': 'Feature Importance',
         'ml_error_target': 'Please select a target variable!',
         'ml_encode_warning': 'Categorical features were automatically encoded.',
-        'ml_na_warning': 'Missing values detected! Please clean them in the "Data Cleaning" tab first.'
+        'ml_na_warning': 'Missing values detected! Please clean them in the "Data Cleaning" tab first.',
+        'export_notebook': '📓 Download Jupyter Notebook'
     }
 }
 
