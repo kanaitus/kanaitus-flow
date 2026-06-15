@@ -6,7 +6,7 @@
 
 ## Русский
 
-**kanaitus-flow** — это современное веб-приложение для интерактивного экспресс-анализа и очистки данных (Data EDA & Cleaning Studio). Оно создано для того, чтобы автоматизировать рутинные задачи аналитика без необходимости писать код в Jupyter Notebook.
+**kanaitus-flow** — это современное веб-приложение для интерактивного экспресс-анализа, очистки данных и машинного обучения (Data EDA, Cleaning & ML Studio). Оно создано для того, чтобы автоматизировать рутинные задачи аналитика без необходимости писать код в Jupyter Notebook с нуля.
 
 ### 🧠 Концепция создания и роль автора
 Этот проект является демонстрацией современного подхода к разработке — **AI-Assisted Development**. 
@@ -22,9 +22,15 @@
 * 🎨 **Премиальный Дизайн:** Эффект матового стекла (Glassmorphism), плавная анимация Lottie, поддержка светлой и темной тем.
 * 🌓 **Локализация:** Полная поддержка русского и английского языков в интерфейсе.
 * 📊 **Авто-Дашборд:** Мгновенный подсчет метрики качества данных (Data Quality Score), автогенерация гистограмм распределения и матрицы корреляций (Plotly).
-* 🛠 **Студия Очистки:** Удаление дубликатов, заполнение пропущенных значений (средним) и фильтрация выбросов по методу IQR в один клик.
+* 🛠 **Студия Очистки:** Удаление дубликатов, заполнение пропущенных значений (средним, медианой или модой) и фильтрация выбросов по методу IQR в один клик.
+* 📈 **Студия Машинного Обучения (ML Studio):** 
+  * Обучение классификаторов и регрессоров (Random Forest, Decision Trees, Logistic/Linear Regression, SVM, Gradient Boosting) без единой строчки кода.
+  * Интерактивная настройка гиперпараметров (shuffle, random state, количество деревьев, глубина и др.) с помощью ползунков.
+  * Автоматический препроцессинг (LabelEncoding категориальных признаков).
+  * Подробный отчет по метрикам качества (Accuracy, Precision, Recall, F1 / MSE, R², MAE) и графики важности признаков (Feature Importance).
+* 📓 **Экспорт в Jupyter Notebook:** Приложение автоматически отслеживает все выполненные шаги по очистке данных и генерирует готовый файл `.ipynb` для скачивания, чтобы вы могли продолжить разработку в профессиональной среде на чистом Python/Pandas.
 * 📉 **Интерактивная Визуализация:** Самостоятельное построение графиков (Scatter, Line, Bar, Boxplot) с гибким выбором осей.
-* 💾 **Экспорт:** Скачивание очищенной таблицы в формате CSV.
+* 💾 **Экспорт данных:** Скачивание очищенной таблицы в формате CSV.
 
 ---
 
@@ -32,6 +38,7 @@
 * **Python 3**
 * **Streamlit** (Интерфейс веб-приложения)
 * **Pandas** (Анализ и трансформация таблиц)
+* **Scikit-Learn** (Построение и оценка моделей машинного обучения)
 * **Plotly** (Интерактивные графики)
 * **Streamlit-Lottie** (Анимации)
 
@@ -53,10 +60,13 @@ pip install -r requirements.txt
 ```
 
 **Для Windows:**
-Рекомендуется использовать виртуальное окружение:
-```powershell
+```bash
 python -m venv venv
-venv\Scripts\activate
+# Активация окружения:
+# В PowerShell:
+.\venv\Scripts\Activate.ps1
+# В командной строке (CMD):
+.\venv\Scripts\activate.bat
 pip install -r requirements.txt
 ```
 
@@ -70,7 +80,7 @@ streamlit run app.py
 
 ## English
 
-**kanaitus-flow** is a modern web application for interactive exploratory data analysis and cleaning (Data EDA & Cleaning Studio). It is designed to automate routine analytical tasks without writing boilerplate code in Jupyter Notebooks.
+**kanaitus-flow** is a modern web application for interactive exploratory data analysis, cleaning, and machine learning (Data EDA, Cleaning & ML Studio). It is designed to automate routine analytical tasks without writing boilerplate code in Jupyter Notebooks.
 
 ### 🧠 Creation Concept & Author's Role
 This project demonstrates the power of the modern **AI-Assisted Development** paradigm.
@@ -86,9 +96,15 @@ This project demonstrates the power of the modern **AI-Assisted Development** pa
 * 🎨 **Premium UI/UX:** Glassmorphism effect, smooth Lottie animations, and seamless dark/light mode integration.
 * 🌓 **Localization:** Full out-of-the-box support for Russian and English languages.
 * 📊 **Automated Dashboard:** Instant Data Quality Score calculation, distribution histograms, and interactive correlation matrices (Plotly).
-* 🛠 **Data Cleaning Studio:** Drop duplicates, fill missing values (mean), and filter outliers using the IQR method in a single click.
+* 🛠 **Data Cleaning Studio:** Drop duplicates, fill missing values, and filter outliers using the IQR method in a single click.
+* 📈 **Machine Learning Studio (ML Studio):**
+  * Train classification and regression models (Random Forest, Decision Trees, Logistic/Linear Regression, SVM, Gradient Boosting) in the browser.
+  * Adjust hyperparameters dynamically (shuffle, random state, number of estimators, max depth, etc.) using slider widgets.
+  * Automatic dataset preprocessing (LabelEncoding for categorical values).
+  * Comprehensive validation metrics (Accuracy, Precision, Recall, F1 / MSE, R², MAE) and interactive feature importance plots.
+* 📓 **Jupyter Notebook Export:** The application automatically tracks every cleaning operation performed on the data and compiles them into a ready-to-run `.ipynb` file, letting you transition smoothly into a professional local IDE.
 * 📉 **Manual Visualization:** Build custom charts (Scatter, Line, Bar, Boxplot) with dynamic axis selection.
-* 💾 **Export:** Download the cleaned dataset as a CSV file.
+* 💾 **Data Export:** Download the cleaned dataset as a CSV file.
 
 ---
 
@@ -96,6 +112,7 @@ This project demonstrates the power of the modern **AI-Assisted Development** pa
 * **Python 3**
 * **Streamlit** (Web framework)
 * **Pandas** (Data manipulation & cleaning)
+* **Scikit-Learn** (Machine learning model building & validation)
 * **Plotly** (Interactive data visualization)
 * **Streamlit-Lottie** (JSON animations)
 
@@ -117,10 +134,13 @@ pip install -r requirements.txt
 ```
 
 **For Windows:**
-It is recommended to use a virtual environment:
 ```powershell
 python -m venv venv
-venv\Scripts\activate
+# Activate the environment:
+# In PowerShell:
+.\venv\Scripts\Activate.ps1
+# In CMD:
+.\venv\Scripts\activate.bat
 pip install -r requirements.txt
 ```
 
@@ -133,3 +153,4 @@ streamlit run app.py
 
 ## ☁️ Deployment / Развертывание
 The app is configured and ready for free hosting on [Streamlit Community Cloud](https://share.streamlit.io/). Just connect your GitHub repository, choose `app.py` as the entrypoint, and hit **Deploy**.
+
